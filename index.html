@@ -1133,13 +1133,24 @@ async function saveClass() {
   try {
     if (editingClassId) {
       await api.patch('classes', data, `?id=eq.${editingClassId}`);
-      showToast('Đã cập nhật lớp ✓', 'success');
+
+      // Đồng bộ lịch/loại/tên lớp xuống toàn bộ học sinh đang thuộc lớp.
+      // Nhờ vậy Điểm danh, Học phí, Zalo và Xuất Excel không còn dùng lịch cũ.
+      await api.patch('students', {
+        class_type: classType,
+        class_type_id: ctId,
+        class_level: name,
+        schedule_days: days
+      }, `?class_id=eq.${editingClassId}`);
+
+      showToast('Đã cập nhật lớp và đồng bộ lịch học sinh ✓', 'success');
     } else {
       await api.post('classes', data);
       showToast('Đã thêm lớp ✓', 'success');
     }
     closeClassModal();
     await loadClasses();
+    await loadStudents();
   } catch(e) { showToast('Lỗi: ' + e.message, 'error'); }
 }
 
@@ -1304,7 +1315,9 @@ async function autoSaveRow(row, classId) {
       name, date_of_birth: dob, phone_zalo: phone, parent_name: parent,
       discount_10: discountPercent >= 10, discount_percent: discountPercent,
       class_type: classType, class_id: classId === 'mamnon' ? null : classId,
-      class_type_id: classTypeId, schedule_days: scheduleDays, active: true
+      class_type_id: classTypeId,
+      class_level: classId === 'mamnon' ? null : (allClasses.find(c => c.id === classId)?.name || null),
+      schedule_days: scheduleDays, active: true
     };
 
     try {
@@ -1445,6 +1458,7 @@ async function saveAllStudents(classId) {
       discount_percent: discountPercent, class_type: classType,
       class_id: classId === 'mamnon' ? null : classId,
       class_type_id: classTypeId,
+      class_level: classId === 'mamnon' ? null : (allClasses.find(c => c.id === classId)?.name || null),
       schedule_days: scheduleDays, active: true
     };
 
@@ -1478,6 +1492,7 @@ async function transferStudent(studentId, newClassId, currentClassId) {
     await api.patch('students', {
       class_id: newClassId,
       class_type: cls.class_type,
+      class_type_id: cls.class_type_id || null,
       class_level: cls.name,
       schedule_days: cls.schedule_days || []
     }, `?id=eq.${studentId}`);
@@ -1497,6 +1512,24 @@ async function deleteStudentRow(studentId, btn) {
     showToast('Đã xóa ✓', 'success');
     await loadStudents();
   } catch(e) { showToast('Lỗi: ' + e.message, 'error'); }
+}
+
+// ============================================
+// SCHEDULE HELPER - lớp là nguồn lịch chính
+// ============================================
+function getStudentSchedule(s) {
+  if (!s) return [];
+
+  // Học sinh đã thuộc một lớp cụ thể: luôn ưu tiên lịch hiện tại của lớp.
+  if (s.class_id) {
+    const cls = allClasses.find(c => c.id === s.class_id);
+    if (cls && Array.isArray(cls.schedule_days)) {
+      return cls.schedule_days.map(String);
+    }
+  }
+
+  // Trường hợp không có class_id (ví dụ mầm non cũ): dùng lịch lưu tại học sinh.
+  return Array.isArray(s.schedule_days) ? s.schedule_days.map(String) : [];
 }
 
 // ============================================
@@ -1527,7 +1560,7 @@ function renderStudents(filter = null, search = '') {
       <td><strong>${s.name}</strong>${s.parent_name ? `<br><small style="color:var(--muted)">PH: ${s.parent_name}</small>` : ''}</td>
       <td style="color:var(--muted)">${s.date_of_birth ? formatDate(s.date_of_birth) : '-'}</td>
       <td><span class="badge badge-${s.class_type}">${typeLabel(s.class_type)}${s.class_level ? ' · ' + s.class_level : ''}</span></td>
-      <td style="color:var(--muted);font-size:12px">${formatDays(s.schedule_days)}</td>
+      <td style="color:var(--muted);font-size:12px">${formatDays(getStudentSchedule(s))}</td>
       <td>${s.phone_zalo ? `<a href="https://zalo.me/${s.phone_zalo}" target="_blank" style="color:var(--blue);font-size:12px">${s.phone_zalo}</a>` : '-'}</td>
       <td>${s.discount_10 ? '<span class="badge badge-discount">-${s.discount_percent||10}%</span>' : '-'}</td>
       <td>
@@ -1551,7 +1584,7 @@ function filterByType(type, el) {
 async function openStudentModal(id = null) {
   editingStudentId = id;
   document.getElementById('modalTitle').textContent = id ? 'Sửa học sinh' : 'Thêm học sinh';
-  document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('#daysPicker .day-btn').forEach(b => b.classList.remove('selected'));
   if (id) {
     const s = allStudents.find(x => x.id === id);
     if (!s) return;
@@ -1563,8 +1596,8 @@ async function openStudentModal(id = null) {
     document.getElementById('s_phone').value = s.phone_zalo || '';
     document.getElementById('s_parent').value = s.parent_name || '';
     document.getElementById('s_discount').checked = s.discount_10;
-    (s.schedule_days || []).forEach(d => {
-      document.querySelector(`.day-btn[data-day="${d}"]`)?.classList.add('selected');
+    getStudentSchedule(s).forEach(d => {
+      document.querySelector(`#daysPicker .day-btn[data-day="${d}"]`)?.classList.add('selected');
     });
   } else {
     document.getElementById('s_name').value = '';
@@ -1592,7 +1625,7 @@ function onTypeChange() {
   document.getElementById('daysPicker').style.display = isMamnon ? 'none' : 'none';
   document.getElementById('mamnonScheduleNote').style.display = isMamnon ? 'block' : 'none';
   if (isMamnon) {
-    document.querySelectorAll('.day-btn').forEach(b => {
+    document.querySelectorAll('#daysPicker .day-btn').forEach(b => {
       b.classList.toggle('selected', ['2','3','4','5','6','7'].includes(b.dataset.day));
     });
   }
@@ -1609,7 +1642,7 @@ async function loadClassesDropdown(type) {
     opt.textContent = c.name;
     sel.appendChild(opt);
   });
-  sel.value = savedVal;
+  sel.value = currentVal;
 }
 
 function closeStudentModal() {
@@ -1626,7 +1659,7 @@ async function saveStudent() {
   if (type !== 'mamnon' && !document.getElementById('s_class_id').value) {
     return showToast('Vui lòng chọn lớp', 'error');
   }
-  const days = [...document.querySelectorAll('.day-btn.selected')].map(b => b.dataset.day);
+  const days = [...document.querySelectorAll('#daysPicker .day-btn.selected')].map(b => b.dataset.day);
   if (type === 'mamnon' && !days.length) return showToast('Vui lòng chọn ít nhất 1 ngày học', 'error');
   const data = {
     name,
@@ -1640,7 +1673,7 @@ async function saveStudent() {
     })(),
     schedule_days: (() => {
       const type = document.getElementById('s_type').value;
-      if (type === 'mamnon') return [...document.querySelectorAll('.day-btn.selected')].map(b => b.dataset.day);
+      if (type === 'mamnon') return [...document.querySelectorAll('#daysPicker .day-btn.selected')].map(b => b.dataset.day);
       const classId = document.getElementById('s_class_id').value;
       const cls = allClasses.find(c => c.id === classId);
       return cls?.schedule_days || [];
@@ -1707,7 +1740,8 @@ async function loadAttendance() {
   // Render per student
   let html = '';
   for (const s of students) {
-    const scheduledDates = getScheduledDates(s.schedule_days || [], yr, mo);
+    const scheduleDays = getStudentSchedule(s);
+    const scheduledDates = getScheduledDates(scheduleDays, yr, mo);
     html += `
       <div class="card" style="margin-bottom:16px">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
@@ -1717,7 +1751,7 @@ async function loadAttendance() {
           </div>
           <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
             <div style="font-size:13px;color:var(--muted)">
-              Lịch: ${formatDays(s.schedule_days)} &nbsp;|&nbsp;
+              Lịch: ${formatDays(scheduleDays)} &nbsp;|&nbsp;
               <span style="color:var(--green)">Có mặt: <strong id="present_${s.id}">-</strong></span> /
               <span>Tổng: ${scheduledDates.length} buổi</span>
             </div>
@@ -1806,7 +1840,7 @@ async function resetAllPresent(studentId) {
   const s = allStudents.find(x => x.id === studentId);
   if (!s) return;
 
-  const scheduledDates = getScheduledDates(s.schedule_days || [], yr, mo);
+  const scheduledDates = getScheduledDates(getStudentSchedule(s), yr, mo);
   showToast('Đang reset...', 'success');
 
   // Delete all attendance records for this student this month
@@ -1828,7 +1862,7 @@ async function markAllAbsent(studentId) {
   const s = allStudents.find(x => x.id === studentId);
   if (!s) return;
 
-  const scheduledDates = getScheduledDates(s.schedule_days || [], yr, mo);
+  const scheduledDates = getScheduledDates(getStudentSchedule(s), yr, mo);
   const daysInMonth = new Date(yr, mo, 0).getDate();
   showToast('Đang lưu...', 'success');
 
@@ -1854,15 +1888,14 @@ function filterAttType(type, el) {
 
 function getScheduledDates(days, year, month) {
   const dates = [];
+  const normalizedDays = Array.isArray(days) ? days.map(String) : [];
   const daysInMonth = new Date(year, month, 0).getDate();
   for (let d = 1; d <= daysInMonth; d++) {
     const date = new Date(year, month - 1, d);
-    const dayOfWeek = date.getDay(); // 0=Sun, 1=Mon...
-    const dayStr = dayOfWeek === 0 ? '0' : String(dayOfWeek + 1);
-    // Convert: JS: 0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat
-    // Our: 2=Mon,3=Tue,4=Wed,5=Thu,6=Fri,7=Sat,0=Sun
+    const dayOfWeek = date.getDay(); // JS: 0=CN,1=T2,2=T3,3=T4,4=T5,5=T6,6=T7
+    // Quy ước hệ thống: 0=CN,2=T2,3=T3,4=T4,5=T5,6=T6,7=T7
     const ourDay = dayOfWeek === 0 ? '0' : String(dayOfWeek + 1);
-    if (days.includes(ourDay)) {
+    if (normalizedDays.includes(ourDay)) {
       dates.push(`${year}-${String(month).padStart(2,'0')}-${String(d).padStart(2,'0')}`);
     }
   }
@@ -1905,7 +1938,7 @@ async function calcAllFees() {
   const [yr, mo] = month.split('-').map(Number);
   try {
     for (const s of allStudents) {
-      const scheduledDates = getScheduledDates(s.schedule_days || [], yr, mo);
+      const scheduledDates = getScheduledDates(getStudentSchedule(s), yr, mo);
       const records = await api.get('attendance', `?student_id=eq.${s.id}&date=gte.${month}-01&date=lte.${month}-${String(new Date(yr,mo,0).getDate()).padStart(2,'0')}`);
       const recMap = {};
       records.forEach(r => { recMap[r.date] = r; });
@@ -2066,7 +2099,7 @@ async function buildZaloMsg(s, f, month, year) {
   const yr = parseInt(year);
   
   // Get scheduled dates and absent dates
-  const scheduledDates = getScheduledDates(s.schedule_days || [], yr, mo);
+  const scheduledDates = getScheduledDates(getStudentSchedule(s), yr, mo);
   const totalSessions = scheduledDates.length;
   const daysInMonth = new Date(yr, mo, 0).getDate();
   const startDate = `${year}-${month}-01`;
@@ -2202,7 +2235,7 @@ async function exportExcel() {
   for (const f of filtered) {
     const s = studentMap[f.student_id];
     if (!s) continue;
-    const scheduledDates = getScheduledDates(s.schedule_days || [], parseInt(yr), parseInt(mo));
+    const scheduledDates = getScheduledDates(getStudentSchedule(s), parseInt(yr), parseInt(mo));
     if (!scheduledDates.length) continue;
 
     // Header row: Tên + dates
@@ -2257,7 +2290,7 @@ async function exportExcel() {
   for (const f of filtered) {
     const s = studentMap[f.student_id];
     if (!s) continue;
-    const scheduledDates = getScheduledDates(s.schedule_days || [], parseInt(yr), parseInt(mo));
+    const scheduledDates = getScheduledDates(getStudentSchedule(s), parseInt(yr), parseInt(mo));
     if (!scheduledDates.length) continue;
     const headerRow2 = ['Tên'];
     scheduledDates.forEach(d => {
@@ -2419,7 +2452,7 @@ function typeLabel(t) {
 function formatDays(days) {
   if (!days || !days.length) return '-';
   const map = {'0':'CN','2':'T2','3':'T3','4':'T4','5':'T5','6':'T6','7':'T7'};
-  return days.map(d => map[d] || d).join(', ');
+  return days.map(d => map[String(d)] || String(d)).join(', ');
 }
 function showToast(msg, type='success') {
   const t = document.getElementById('toast');
