@@ -24,9 +24,13 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
+
+  /* LAYOUT */
   .app { display: flex; min-height: 100vh; }
   .sidebar { width: 220px; background: var(--surface); border-right: 1px solid var(--border); padding: 20px 0; flex-shrink: 0; position: fixed; height: 100vh; overflow-y: auto; z-index: 100; display: flex; flex-direction: column; }
   .main { margin-left: 220px; padding: 24px; flex: 1; min-width: 0; }
+
+  /* SIDEBAR */
   .logo { padding: 0 20px 20px; border-bottom: 1px solid var(--border); margin-bottom: 12px; }
   .logo h1 { font-size: 15px; font-weight: 700; color: var(--accent); line-height: 1.3; }
   .logo span { font-size: 11px; color: var(--muted); }
@@ -35,9 +39,13 @@
   .nav-item.active { color: var(--accent); background: rgba(240,165,0,0.08); border-left-color: var(--accent); }
   .nav-icon { font-size: 16px; width: 20px; text-align: center; }
   .nav-section { font-size: 10px; color: var(--muted); padding: 16px 20px 6px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* HEADER */
   .page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
   .page-title { font-size: 22px; font-weight: 700; }
   .page-title span { color: var(--accent); }
+
+  /* CARDS */
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
   .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
   .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
@@ -47,6 +55,8 @@
   .stat-value.blue { color: var(--blue); }
   .stat-value.green { color: var(--green); }
   .stat-value.red { color: var(--accent2); }
+
+  /* BUTTONS */
   .btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.15s; }
   .btn-primary { background: var(--accent); color: #000; }
   .btn-primary:hover { background: #ffb820; }
@@ -57,17 +67,23 @@
   .btn-sm { padding: 5px 10px; font-size: 12px; }
   .btn-green { background: rgba(62,207,142,0.15); color: var(--green); border: 1px solid rgba(62,207,142,0.3); }
   .btn-green:hover { background: rgba(62,207,142,0.25); }
+
+  /* TABLE */
   .table-wrap { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   th { padding: 10px 14px; text-align: left; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
   td { padding: 12px 14px; border-bottom: 1px solid rgba(46,51,72,0.5); vertical-align: middle; }
   tr:hover td { background: rgba(255,255,255,0.02); }
   tr:last-child td { border-bottom: none; }
+
+  /* BADGE */
   .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
   .badge-mamnon { background: rgba(240,165,0,0.15); color: var(--mamnon); }
   .badge-tienganh { background: rgba(74,158,255,0.15); color: var(--tienganh); }
   .badge-toan { background: rgba(62,207,142,0.15); color: var(--toan); }
   .badge-discount { background: rgba(224,92,92,0.15); color: var(--accent2); }
+
+  /* FORM / MODAL */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; }
   .modal-overlay.show { display: flex; }
   .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px; width: 520px; max-width: 95vw; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow); }
@@ -81,33 +97,50 @@
   input[type=checkbox] { width: auto; accent-color: var(--accent); }
   .check-row { display: flex; align-items: center; gap: 8px; }
   .check-row label { font-size: 13px; color: var(--text); margin: 0; }
+
+  /* SCHEDULE PICKER */
   .days-picker { display: flex; gap: 6px; flex-wrap: wrap; }
   .day-btn { width: 38px; height: 38px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); color: var(--muted); cursor: pointer; font-size: 12px; font-weight: 600; transition: all 0.15s; }
   .day-btn.selected { background: var(--accent); color: #000; border-color: var(--accent); }
+
+  /* TABS */
   .tabs { display: flex; gap: 4px; margin-bottom: 20px; background: var(--surface2); padding: 4px; border-radius: 10px; width: fit-content; }
   .tab { padding: 8px 18px; border-radius: 7px; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--muted); transition: all 0.15s; border: none; background: transparent; }
   .tab.active { background: var(--surface); color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+
+  /* SEARCH */
   .search-bar { display: flex; gap: 10px; margin-bottom: 16px; align-items: center; }
   .search-input { flex: 1; max-width: 280px; }
+
+  /* PAGE */
   .page { display: none; }
   .page.active { display: block; }
+
+  /* TOAST */
   .toast { position: fixed; bottom: 24px; right: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 20px; font-size: 14px; z-index: 9999; opacity: 0; transform: translateY(10px); transition: all 0.25s; max-width: 320px; }
   .toast.show { opacity: 1; transform: translateY(0); }
   .toast.success { border-color: var(--green); color: var(--green); }
   .toast.error { border-color: var(--accent2); color: var(--accent2); }
+
+  /* CONFIG PAGE */
   .config-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; }
   .config-title { font-size: 14px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
   .config-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .config-item { display: flex; flex-direction: column; gap: 6px; }
+
+  /* LOGIN */
   .login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--bg); }
   .login-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 40px; width: 360px; text-align: center; }
   .login-box h1 { color: var(--accent); font-size: 22px; margin-bottom: 6px; }
   .login-box p { color: var(--muted); font-size: 13px; margin-bottom: 28px; }
+
+  /* SETUP GUIDE */
   .setup-box { background: var(--surface2); border: 1px solid var(--accent); border-radius: var(--radius); padding: 20px; margin-bottom: 24px; }
   .setup-box h3 { color: var(--accent); margin-bottom: 12px; font-size: 15px; }
   .setup-box ol { padding-left: 18px; font-size: 13px; line-height: 2; color: var(--muted); }
   .setup-box ol li span { color: var(--text); }
   .setup-box input { margin-top: 10px; }
+
   .empty-state { text-align: center; padding: 48px 20px; color: var(--muted); }
   .inline-input { background: transparent; border: 1px solid transparent; border-radius: 6px; padding: 6px 8px; color: var(--text); font-size: 13px; width: 100%; outline: none; transition: all 0.15s; }
   .inline-input:focus { background: var(--surface2); border-color: var(--accent); }
@@ -117,7 +150,9 @@
   .student-table th { padding: 10px; font-size: 11px; color: var(--muted); text-transform: uppercase; }
   .empty-state .icon { font-size: 40px; margin-bottom: 12px; }
   .empty-state p { font-size: 14px; }
+
   .actions-row { display: flex; gap: 6px; }
+
   @media (max-width: 900px) {
     .sidebar { display: none; }
     .main { margin-left: 0; padding: 12px; padding-bottom: 80px; }
@@ -180,6 +215,7 @@
 </head>
 <body>
 
+<!-- LOGIN -->
 <div id="loginPage" class="login-wrap">
   <div class="login-box">
     <div style="font-size:40px;margin-bottom:12px">🏫</div>
@@ -212,7 +248,9 @@
   </div>
 </div>
 
+<!-- APP -->
 <div id="appWrap" class="app" style="display:none">
+  <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="logo">
       <h1>🏫 HocPhi<br>Manager</h1>
@@ -253,8 +291,10 @@
     </div>
   </div>
 
+  <!-- MAIN -->
   <div class="main">
 
+    <!-- DASHBOARD -->
     <div id="page-dashboard" class="page active">
       <div class="page-header">
         <div class="page-title">Tổng quan <span id="dashMonthLabel"></span></div>
@@ -271,6 +311,7 @@
       </div>
     </div>
 
+    <!-- STUDENTS -->
     <div id="page-students" class="page">
       <div class="page-header">
         <div class="page-title">👨‍🎓 Học sinh</div>
@@ -285,6 +326,7 @@
       </div>
     </div>
 
+    <!-- CLASSES -->
     <div id="page-classes" class="page">
       <div class="page-header">
         <div class="page-title">🏫 Quản lý lớp</div>
@@ -309,6 +351,7 @@
       </div>
     </div>
 
+    <!-- ATTENDANCE -->
     <div id="page-attendance" class="page">
       <div class="page-header">
         <div class="page-title">📅 Điểm danh</div>
@@ -323,6 +366,7 @@
       <div id="attendanceContent"><div class="empty-state"><div class="icon">📅</div><p>Chọn tháng để xem điểm danh</p></div></div>
     </div>
 
+    <!-- FEES -->
     <div id="page-fees" class="page">
       <div class="page-header">
         <div class="page-title">💰 Học phí</div>
@@ -353,6 +397,7 @@
       </div>
     </div>
 
+    <!-- ZALO -->
     <div id="page-zalo" class="page">
       <div class="page-header">
         <div class="page-title">💬 Gửi Zalo</div>
@@ -366,6 +411,7 @@
       <div id="zaloContent"><div class="empty-state"><div class="icon">💬</div><p>Chọn tháng để tạo tin nhắn</p></div></div>
     </div>
 
+    <!-- EXPORT -->
     <div id="page-export" class="page">
       <div class="page-header">
         <div class="page-title">📤 Xuất Excel</div>
@@ -390,6 +436,7 @@
       </div>
     </div>
 
+    <!-- CONFIG -->
     <div id="page-config" class="page">
       <div class="page-header">
         <div class="page-title">⚙️ Loại lớp & Học phí</div>
@@ -398,6 +445,7 @@
       <div id="classTypeList"><div class="empty-state"><div class="icon">⚙️</div><p>Đang tải...</p></div></div>
     </div>
 
+    <!-- SETTINGS -->
     <div id="page-settings" class="page">
       <div class="page-header"><div class="page-title">🔒 Cài đặt</div></div>
       <div class="card" style="max-width:400px">
@@ -417,7 +465,8 @@
       </div>
     </div>
 
-  </div>
+  </div><!-- /main -->
+  <!-- BOTTOM NAV (mobile) - scroll ngang -->
   <nav class="bottom-nav" id="bottomNav">
     <div class="bottom-nav-inner">
       <button class="bottom-nav-item active" onclick="showPageMobile('dashboard',this)">
@@ -449,8 +498,9 @@
       </button>
     </div>
   </nav>
-</div>
+</div><!-- /app -->
 
+<!-- CLASS MODAL -->
 <div id="classModal" class="modal-overlay">
   <div class="modal">
     <h2 id="classModalTitle">Thêm lớp</h2>
@@ -484,6 +534,7 @@
   </div>
 </div>
 
+<!-- STUDENT MODAL -->
 <div id="studentModal" class="modal-overlay">
   <div class="modal">
     <h2 id="modalTitle">Thêm học sinh</h2>
@@ -534,6 +585,7 @@
   </div>
 </div>
 
+<!-- CLASS TYPE MODAL -->
 <div id="classTypeModal" class="modal-overlay">
   <div class="modal">
     <h2 id="classTypeModalTitle">Thêm loại lớp</h2>
@@ -577,12 +629,20 @@
   </div>
 </div>
 
+<!-- TOAST -->
 <div id="toast" class="toast"></div>
 
 <script>
-let SUPABASE_URL = localStorage.getItem('hpm_url') || 'https://pbxzxjlbecaebsueuwqa.supabase.co';
-let SUPABASE_KEY = localStorage.getItem('hpm_key') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBieHp4amxiZWNhZWJzdWV1d3FhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxOTI5ODgsImV4cCI6MjA5Nzc2ODk4OH0.TWdDQcRQJwp_968D4PkjeiVDf6FufQz4xWeMFL8RxRw';
+// ============================================
+// CONFIG
+// ============================================
+// Config mặc định - đã lưu sẵn
+let SUPABASE_URL = localStorage.getItem('hpm_url') || 'https://wydedeirhcutkgdkdmpz.supabase.co';
+let SUPABASE_KEY = localStorage.getItem('hpm_key') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5ZGVkZWlyaGN1dGtnZGtkbXB6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3MDc2MDMsImV4cCI6MjA5ODI4MzYwM30.YCDlNDbpUxZdtfa0XMvxjGuHNI9ERmImC3qZSOrdKbM';
 
+// ============================================
+// SUPABASE API
+// ============================================
 async function sb(table, method='GET', body=null, query='') {
   const url = `${SUPABASE_URL}/rest/v1/${table}${query}`;
   const res = await fetch(url, {
@@ -608,9 +668,8 @@ const api = {
   post: (t, b) => sb(t, 'POST', b),
   patch: (t, b, q) => sb(t, 'PATCH', b, q),
   delete: (t, q) => sb(t, 'DELETE', null, q),
-  upsert: async (t, b, onConflict) => {
-    const conflictQ = onConflict ? `?on_conflict=${onConflict}` : '';
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/${t}${conflictQ}`, {
+  upsert: async (t, b) => {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${t}`, {
       method: 'POST',
       headers: {
         'apikey': SUPABASE_KEY,
@@ -620,15 +679,14 @@ const api = {
       },
       body: JSON.stringify(b)
     });
-    if (!res.ok) {
-      const err = await res.text();
-      throw new Error(err);
-    }
     const text = await res.text();
     return text ? JSON.parse(text) : null;
   }
 };
 
+// ============================================
+// STATE
+// ============================================
 let allClasses = [];
 let allClassTypes = [];
 let allStudents = [];
@@ -642,6 +700,8 @@ function populateClassDropdown(selectId, currentVal) {
   if (!sel) return;
   const savedVal = currentVal || sel.value || 'all';
   sel.innerHTML = '<option value="all">Tất cả lớp</option>';
+  
+  // Group classes by class_type name
   const typeGroups = {};
   allClasses.forEach(c => {
     const ct = allClassTypes.find(x => x.id === c.class_type_id);
@@ -649,6 +709,8 @@ function populateClassDropdown(selectId, currentVal) {
     if (!typeGroups[groupName]) typeGroups[groupName] = [];
     typeGroups[groupName].push(c);
   });
+
+  // For studentClassFilter - add mamnon option if no mamnon class exists
   if (selectId === 'studentClassFilter') {
     const hasMamnonClass = allClasses.some(c => c.class_type === 'mamnon');
     if (!hasMamnonClass) {
@@ -658,6 +720,7 @@ function populateClassDropdown(selectId, currentVal) {
       sel.appendChild(opt);
     }
   }
+
   Object.entries(typeGroups).forEach(([groupName, classes]) => {
     if (!classes.length) return;
     if (classes.length === 1 && selectId === 'studentClassFilter') {
@@ -680,6 +743,9 @@ function populateClassDropdown(selectId, currentVal) {
   sel.value = savedVal;
 }
 
+// ============================================
+// SETUP & LOGIN
+// ============================================
 function toggleSetup() {
   const g = document.getElementById('setupGuide');
   g.style.display = g.style.display === 'none' ? 'block' : 'none';
@@ -726,6 +792,7 @@ async function doLogin() {
 
 function showPageMobile(name, el) {
   showPage(name);
+  // Update bottom nav active state
   document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.remove('active'));
   if (el) el.classList.add('active');
   closeMore();
@@ -754,6 +821,9 @@ async function initApp() {
   loadDashboard();
 }
 
+// ============================================
+// NAVIGATION
+// ============================================
 function showPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -771,6 +841,9 @@ function showPage(name) {
   if (name === 'config') loadConfigForm();
 }
 
+// ============================================
+// FEE CONFIGS
+// ============================================
 async function loadFeeConfigs() {
   try {
     const rows = await api.get('fee_configs');
@@ -780,7 +853,6 @@ async function loadFeeConfigs() {
 }
 
 function loadConfigForm() {
-  if (!document.getElementById('cfg_mn_base')) return;
   if (feeConfigs.mamnon) {
     document.getElementById('cfg_mn_base').value = feeConfigs.mamnon.base_fee || 3500000;
     document.getElementById('cfg_mn_meal').value = feeConfigs.mamnon.meal_fee_per_session || 25000;
@@ -807,12 +879,16 @@ async function saveConfigs() {
   } catch(e) { showToast('Lỗi: ' + e.message, 'error'); }
 }
 
+// ============================================
+// CLASS TYPES
+// ============================================
 let editingClassTypeId = null;
 
 async function loadClassTypes() {
   try {
     allClassTypes = await api.get('class_types', '?active=eq.true&order=name.asc');
     renderClassTypes();
+    // Update class type dropdown in class modal
     updateClassTypeDropdown();
   } catch(e) { console.error(e); }
 }
@@ -934,6 +1010,9 @@ async function deleteClassType(id, name) {
   } catch(e) { showToast('Lỗi: ' + e.message, 'error'); }
 }
 
+// ============================================
+// CLASSES
+// ============================================
 let editingClassId = null;
 let currentClassFilter = 'all';
 
@@ -941,6 +1020,7 @@ async function loadClasses() {
   try {
     allClasses = await api.get('classes', '?active=eq.true&order=name.asc');
     renderClasses();
+    // Update all dropdowns (giữ nguyên lựa chọn hiện tại)
     ['feeClassFilter','zaloClassFilter','exportClassFilter'].forEach(id => {
       const el = document.getElementById(id);
       populateClassDropdown(id, el ? el.value : 'all');
@@ -985,6 +1065,7 @@ function renderClasses(filter) {
       </td>
     </tr>
   `).join('');
+  // Refresh all dropdowns (giữ nguyên lựa chọn hiện tại)
   setTimeout(() => {
     ['feeClassFilter','zaloClassFilter','exportClassFilter','attClassFilter'].forEach(id => {
       const el = document.getElementById(id);
@@ -1044,20 +1125,14 @@ async function saveClass() {
   const isMamnon = ct?.fee_type === 'fixed';
   let days = [...document.querySelectorAll('#classDaysPicker .day-btn.selected')].map(b => b.dataset.day);
   if (isMamnon) days = ['2','3','4','5','6','7'];
+  // Map class_type for backward compat
   let classType = 'tienganh';
-  if (ct?.name?.toLowerCase().includes('mầm non')) classType = 'mamnon';
+  if (ct?.name?.toLowerCase().includes('mầm non') || isMamnon) classType = 'mamnon';
   else if (ct?.name?.toLowerCase().includes('toán')) classType = 'toan';
   const data = { name, class_type: classType, class_type_id: ctId, schedule_days: days, active: true };
   try {
     if (editingClassId) {
       await api.patch('classes', data, `?id=eq.${editingClassId}`);
-      // Đồng bộ lịch học mới xuống TOÀN BỘ học sinh đang thuộc lớp này.
-      // Nếu không làm bước này, trang Điểm danh sẽ vẫn dùng lịch cũ đã lưu sẵn
-      // trong từng học sinh (student.schedule_days) từ lần lưu trước, gây lệch
-      // với lịch mới sửa ở Quản lý lớp.
-      if (!isMamnon) {
-        await api.patch('students', { schedule_days: days }, `?class_id=eq.${editingClassId}`);
-      }
       showToast('Đã cập nhật lớp ✓', 'success');
     } else {
       await api.post('classes', data);
@@ -1065,7 +1140,6 @@ async function saveClass() {
     }
     closeClassModal();
     await loadClasses();
-    await loadStudents();
   } catch(e) { showToast('Lỗi: ' + e.message, 'error'); }
 }
 
@@ -1080,8 +1154,12 @@ async function deleteClass(id, name) {
   } catch(e) { showToast('Lỗi: ' + e.message, 'error'); }
 }
 
-let currentClassStudents = [];
-let pendingChanges = {};
+// ============================================
+// STUDENTS - Class based
+// ============================================
+
+let currentClassStudents = []; // students in selected class
+let pendingChanges = {}; // track changes before save
 
 async function loadStudentsByClass() {
   const classId = document.getElementById('studentClassFilter').value;
@@ -1089,6 +1167,8 @@ async function loadStudentsByClass() {
     document.getElementById('studentClassContent').innerHTML = `<div class="empty-state"><div class="icon">🏫</div><p>Chọn lớp để xem và nhập học sinh</p></div>`;
     return;
   }
+
+  // Find class info
   let cls, isMamnon = false;
   if (classId === 'mamnon') {
     cls = { name: 'Mầm non', class_type: 'mamnon', schedule_days: ['2','3','4','5','6','7'] };
@@ -1097,10 +1177,13 @@ async function loadStudentsByClass() {
     cls = allClasses.find(c => c.id === classId);
   }
   if (!cls) return;
+
+  // Get students in this class
   let students;
   if (isMamnon) {
     students = allStudents.filter(s => s.class_type === 'mamnon');
   } else {
+    // Also include mamnon students if class is mamnon type
     const cls = allClasses.find(c => c.id === classId);
     if (cls?.class_type === 'mamnon') {
       students = allStudents.filter(s => s.class_type === 'mamnon' && (s.class_id === classId || !s.class_id));
@@ -1109,20 +1192,23 @@ async function loadStudentsByClass() {
     }
   }
   currentClassStudents = [...students];
+
   renderClassStudentTable(cls, students, classId);
 }
 
 function renderClassStudentTable(cls, students, classId) {
   const otherClasses = allClasses.filter(c => c.id !== classId);
+  
   let rows = students.map((s, i) => buildStudentRow(s, i, otherClasses, classId)).join('');
+  // Add empty row for new student
   rows += buildEmptyRow(students.length, otherClasses, classId);
+
   const html = `
     <div class="card">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
         <div style="font-size:15px;font-weight:700">🏫 ${cls.name} <span style="color:var(--muted);font-size:13px;font-weight:400">(${students.length} học sinh)</span></div>
         <div style="display:flex;gap:8px">
           <button class="btn btn-secondary btn-sm" onclick="addNewRow('${classId}')">+ Thêm hàng</button>
-          <button class="btn btn-green btn-sm" onclick="exportStudentList('${classId}','${cls.name}')">📤 Xuất Excel</button>
           <button class="btn btn-primary" onclick="saveAllStudents('${classId}')">💾 Lưu tất cả</button>
         </div>
       </div>
@@ -1145,6 +1231,8 @@ function renderClassStudentTable(cls, students, classId) {
       </div>
     </div>`;
   document.getElementById('studentClassContent').innerHTML = html;
+
+  // Auto-save khi rời khỏi ô (blur) - dùng event delegation
   const tbody = document.getElementById('classStudentBody');
   tbody.addEventListener('blur', function(e) {
     const input = e.target;
@@ -1152,6 +1240,8 @@ function renderClassStudentTable(cls, students, classId) {
     if (input.dataset.field === 'transfer') return;
     autoSaveRow(input.closest('tr'), classId);
   }, true);
+
+  // Auto thêm / khi gõ ngày sinh
   tbody.addEventListener('input', function(e) {
     const input = e.target;
     if (!input.classList.contains('inline-input')) return;
@@ -1175,7 +1265,9 @@ async function autoSaveRow(row, classId) {
   if (!row) return;
   const studentId = row.dataset.studentId;
   const name = row.querySelector('[data-field="name"]')?.value?.trim();
-  if (!name) return;
+  if (!name) return; // chưa nhập tên thì không lưu
+
+  // Debounce nhẹ để tránh gọi API liên tục khi gõ nhanh
   clearTimeout(autoSaveTimers[studentId]);
   autoSaveTimers[studentId] = setTimeout(async () => {
     let scheduleDays, classType, classTypeId;
@@ -1190,13 +1282,15 @@ async function autoSaveRow(row, classId) {
       classTypeId = cls?.class_type_id || null;
       if (classType === 'mamnon' && !scheduleDays.length) scheduleDays = ['2','3','4','5','6','7'];
     }
+
     const dobRaw = row.querySelector('[data-field="dob"]')?.value?.trim() || null;
+    // Convert dd/mm/yyyy hoặc dd-mm-yyyy sang yyyy-mm-dd
     let dob = null;
     if (dobRaw) {
       const parts = dobRaw.split(/[\/\-\.]/);
       if (parts.length === 3) {
         if (parts[0].length === 4) {
-          dob = dobRaw;
+          dob = dobRaw; // đã đúng format yyyy-mm-dd
         } else {
           dob = `${parts[2]}-${parts[1].padStart(2,'0')}-${parts[0].padStart(2,'0')}`;
         }
@@ -1205,17 +1299,20 @@ async function autoSaveRow(row, classId) {
     const phone = row.querySelector('[data-field="phone"]')?.value?.trim() || null;
     const parent = row.querySelector('[data-field="parent"]')?.value?.trim() || null;
     const discountPercent = parseInt(row.querySelector('[data-field="discount"]')?.value) || 0;
+
     const data = {
       name, date_of_birth: dob, phone_zalo: phone, parent_name: parent,
       discount_10: discountPercent >= 10, discount_percent: discountPercent,
       class_type: classType, class_id: classId === 'mamnon' ? null : classId,
       class_type_id: classTypeId, schedule_days: scheduleDays, active: true
     };
+
     try {
       if (studentId.startsWith('new_')) {
         const created = await api.post('students', data);
         if (created && created[0]) {
           row.dataset.studentId = created[0].id;
+          // Thêm hàng trống mới ở dưới
           const tbody = document.getElementById('classStudentBody');
           if (tbody && tbody.lastElementChild === row) {
             const otherClasses = allClasses.filter(c => c.id !== classId);
@@ -1227,7 +1324,6 @@ async function autoSaveRow(row, classId) {
         }
       } else {
         await api.patch('students', data, `?id=eq.${studentId}`);
-        await recalcAllFeesForStudent(studentId);
       }
       showAutoSaveBadge(row);
       await loadStudents();
@@ -1247,6 +1343,7 @@ function buildStudentRow(s, i, otherClasses, currentClassId) {
   const classOptions = otherClasses.map(c => 
     `<option value="${c.id}">${c.name}</option>`
   ).join('');
+  
   return `<tr data-student-id="${s.id}" style="border-bottom:1px solid rgba(46,51,72,0.4)">
     <td style="color:var(--muted);font-size:12px">${i+1}</td>
     <td><input class="inline-input" value="${s.name||''}" data-field="name" placeholder="Tên học sinh *" /></td>
@@ -1302,6 +1399,8 @@ async function saveAllStudents(classId) {
   const tbody = document.getElementById('classStudentBody');
   const rows = tbody.querySelectorAll('tr');
   let saved = 0, errors = 0;
+
+  // Find class info for schedule_days
   let scheduleDays, classType, classTypeId;
   if (classId === 'mamnon') {
     scheduleDays = ['2','3','4','5','6','7'];
@@ -1312,21 +1411,25 @@ async function saveAllStudents(classId) {
     scheduleDays = cls?.schedule_days || [];
     classType = cls?.class_type || 'tienganh';
     classTypeId = cls?.class_type_id || null;
+    // If mamnon class type, auto set schedule
     if (classType === 'mamnon' && !scheduleDays.length) {
       scheduleDays = ['2','3','4','5','6','7'];
     }
   }
+
   for (const row of rows) {
     const studentId = row.dataset.studentId;
     const name = row.querySelector('[data-field="name"]')?.value?.trim();
-    if (!name) continue;
+    if (!name) continue; // skip empty rows
+
     const dobRaw = row.querySelector('[data-field="dob"]')?.value?.trim() || null;
+    // Convert dd/mm/yyyy hoặc dd-mm-yyyy sang yyyy-mm-dd
     let dob = null;
     if (dobRaw) {
       const parts = dobRaw.split(/[\/\-\.]/);
       if (parts.length === 3) {
         if (parts[0].length === 4) {
-          dob = dobRaw;
+          dob = dobRaw; // đã đúng format yyyy-mm-dd
         } else {
           dob = `${parts[2]}-${parts[1].padStart(2,'0')}-${parts[0].padStart(2,'0')}`;
         }
@@ -1335,6 +1438,7 @@ async function saveAllStudents(classId) {
     const phone = row.querySelector('[data-field="phone"]')?.value?.trim() || null;
     const parent = row.querySelector('[data-field="parent"]')?.value?.trim() || null;
     const discountPercent = parseInt(row.querySelector('[data-field="discount"]')?.value) || 0;
+
     const data = {
       name, date_of_birth: dob, phone_zalo: phone, parent_name: parent,
       discount_10: discountPercent >= 10,
@@ -1343,16 +1447,17 @@ async function saveAllStudents(classId) {
       class_type_id: classTypeId,
       schedule_days: scheduleDays, active: true
     };
+
     try {
       if (studentId.startsWith('new_')) {
         await api.post('students', data);
       } else {
         await api.patch('students', data, `?id=eq.${studentId}`);
-        await recalcAllFeesForStudent(studentId);
       }
       saved++;
     } catch(e) { errors++; console.error(e); }
   }
+
   showToast(`Đã lưu ${saved} học sinh${errors ? ', lỗi: '+errors : ''} ✓`, errors ? 'error' : 'success');
   await loadStudents();
   loadStudentsByClass();
@@ -1362,10 +1467,13 @@ async function transferStudent(studentId, newClassId, currentClassId) {
   if (!newClassId) return;
   const cls = allClasses.find(c => c.id === newClassId);
   if (!cls) return;
+  
   if (!confirm(`Chuyển học sinh sang lớp "${cls.name}"?`)) {
+    // Reset dropdown
     loadStudentsByClass();
     return;
   }
+
   try {
     await api.patch('students', {
       class_id: newClassId,
@@ -1391,6 +1499,9 @@ async function deleteStudentRow(studentId, btn) {
   } catch(e) { showToast('Lỗi: ' + e.message, 'error'); }
 }
 
+// ============================================
+// STUDENTS
+// ============================================
 async function loadStudents() {
   try {
     allStudents = await api.get('students', '?active=eq.true&order=name.asc');
@@ -1406,7 +1517,6 @@ function renderStudents(filter = null, search = '') {
     return typeMatch && nameMatch;
   });
   const tbody = document.getElementById('studentTableBody');
-  if (!tbody) return;
   if (!list.length) {
     tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state"><div class="icon">👨‍🎓</div><p>Không có học sinh</p></div></td></tr>`;
     return;
@@ -1419,7 +1529,7 @@ function renderStudents(filter = null, search = '') {
       <td><span class="badge badge-${s.class_type}">${typeLabel(s.class_type)}${s.class_level ? ' · ' + s.class_level : ''}</span></td>
       <td style="color:var(--muted);font-size:12px">${formatDays(s.schedule_days)}</td>
       <td>${s.phone_zalo ? `<a href="https://zalo.me/${s.phone_zalo}" target="_blank" style="color:var(--blue);font-size:12px">${s.phone_zalo}</a>` : '-'}</td>
-      <td>${s.discount_10 ? `<span class="badge badge-discount">-${s.discount_percent||10}%</span>` : '-'}</td>
+      <td>${s.discount_10 ? '<span class="badge badge-discount">-${s.discount_percent||10}%</span>' : '-'}</td>
       <td>
         <div class="actions-row">
           <button class="btn btn-secondary btn-sm" onclick="openStudentModal('${s.id}')">✏️</button>
@@ -1472,8 +1582,12 @@ async function openStudentModal(id = null) {
 function onTypeChange() {
   const type = document.getElementById('s_type').value;
   const isMamnon = type === 'mamnon';
+
+  // Level/class field
   document.getElementById('levelGroup').style.display = isMamnon ? 'none' : 'flex';
   if (!isMamnon) loadClassesDropdown(type);
+
+  // Schedule - ẩn khi chọn lớp (lịch lấy từ lớp)
   document.getElementById('scheduleGroup').style.display = isMamnon ? 'flex' : 'none';
   document.getElementById('daysPicker').style.display = isMamnon ? 'none' : 'none';
   document.getElementById('mamnonScheduleNote').style.display = isMamnon ? 'block' : 'none';
@@ -1495,7 +1609,7 @@ async function loadClassesDropdown(type) {
     opt.textContent = c.name;
     sel.appendChild(opt);
   });
-  sel.value = currentVal;
+  sel.value = savedVal;
 }
 
 function closeStudentModal() {
@@ -1533,13 +1647,13 @@ async function saveStudent() {
     })(),
     phone_zalo: document.getElementById('s_phone').value.trim() || null,
     parent_name: document.getElementById('s_parent').value.trim() || null,
+    // schedule_days set above
     discount_10: document.getElementById('s_discount').checked,
     active: true
   };
   try {
     if (editingStudentId) {
       await api.patch('students', data, `?id=eq.${editingStudentId}`);
-      await recalcAllFeesForStudent(editingStudentId);
       showToast('Đã cập nhật học sinh ✓', 'success');
     } else {
       await api.post('students', data);
@@ -1559,10 +1673,14 @@ async function deleteStudent(id, name) {
   } catch(e) { showToast('Lỗi: ' + e.message, 'error'); }
 }
 
+// ============================================
+// ATTENDANCE
+// ============================================
 async function loadAttendance() {
   const month = document.getElementById('attMonth').value;
   if (!month) return;
   const classFilter = document.getElementById('attClassFilter')?.value || 'all';
+  // Find class info to determine filter
   const filterClass = allClasses.find(c => c.id === classFilter);
   const students = allStudents.filter(s => {
     if (classFilter === 'all') return true;
@@ -1574,13 +1692,19 @@ async function loadAttendance() {
     document.getElementById('attendanceContent').innerHTML = `<div class="empty-state"><div class="icon">👨‍🎓</div><p>Không có học sinh</p></div>`;
     return;
   }
+
+  // Tạo tất cả ngày học trong tháng cho từng học sinh
   const [yr, mo] = month.split('-').map(Number);
   const daysInMonth = new Date(yr, mo, 0).getDate();
+
+  // Load attendance records
   const startDate = `${month}-01`;
   const endDate = `${month}-${String(daysInMonth).padStart(2,'0')}`;
   const records = await api.get('attendance', `?student_id=in.(${students.map(s=>s.id).join(',')})&date=gte.${startDate}&date=lte.${endDate}`);
   const recMap = {};
   records.forEach(r => { recMap[`${r.student_id}_${r.date}`] = r; });
+
+  // Render per student
   let html = '';
   for (const s of students) {
     const scheduledDates = getScheduledDates(s.schedule_days || [], yr, mo);
@@ -1607,7 +1731,7 @@ async function loadAttendance() {
     for (const date of scheduledDates) {
       const key = `${s.id}_${date}`;
       const rec = recMap[key];
-      const present = rec ? rec.present : true;
+      const present = rec ? rec.present : true; // Default: có mặt
       if (present) presentCount++;
       const d = new Date(date + 'T00:00:00');
       const dayLabel = d.getDate();
@@ -1623,6 +1747,7 @@ async function loadAttendance() {
       `;
     }
     html += `</div></div>`;
+    // Update count after render
     setTimeout(() => {
       const el = document.getElementById(`present_${s.id}`);
       if (el) el.textContent = scheduledDates.filter(date => {
@@ -1632,45 +1757,43 @@ async function loadAttendance() {
     }, 0);
   }
   document.getElementById('attendanceContent').innerHTML = html;
-  const attEl = document.getElementById('attendanceContent');
-  if (!attEl.dataset.listenerBound) {
-    attEl.dataset.listenerBound = '1';
-    attEl.addEventListener('click', async function(e) {
-      const btn = e.target.closest('.att-btn');
-      if (!btn) return;
-      e.preventDefault();
-      e.stopPropagation();
-      if (btn.dataset.busy === '1') return;
-      btn.dataset.busy = '1';
-      const studentId = btn.dataset.student;
-      const date = btn.dataset.date;
-      try {
-        await toggleAtt(studentId, date, btn);
-      } finally {
-        btn.dataset.busy = '0';
-      }
-    });
-  }
+  // Event delegation for attendance buttons
+  document.getElementById('attendanceContent').addEventListener('click', async function(e) {
+    const btn = e.target.closest('.att-btn');
+    if (!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const studentId = btn.dataset.student;
+    const date = btn.dataset.date;
+    console.log('Click att:', studentId, date);
+    await toggleAtt(studentId, date, btn);
+  });
 }
 
 async function toggleAtt(studentId, date, btn) {
+  // Dùng data attribute để track trạng thái thay vì check màu
   const isPresent = btn.dataset.present !== 'false';
   const newPresent = !isPresent;
   try {
-    await api.upsert('attendance', { student_id: studentId, date, present: newPresent }, 'student_id,date');
+    const existing = await api.get('attendance', `?student_id=eq.${studentId}&date=eq.${date}`);
+    if (existing && existing.length > 0) {
+      await api.patch('attendance', { present: newPresent }, `?student_id=eq.${studentId}&date=eq.${date}`);
+    } else {
+      await api.post('attendance', { student_id: studentId, date, present: newPresent });
+    }
+    // Update UI
     btn.dataset.present = newPresent ? 'true' : 'false';
     btn.style.background = newPresent ? 'rgba(62,207,142,0.15)' : 'rgba(224,92,92,0.15)';
     btn.style.color = newPresent ? '#3ecf8e' : '#e05c5c';
     btn.style.borderColor = newPresent ? 'rgba(62,207,142,0.4)' : 'rgba(224,92,92,0.4)';
     btn.title = `${date} - ${newPresent ? 'Có mặt' : 'Nghỉ'}`;
+    // Update count
     const parentCard = btn.closest('.card');
     const allBtns = parentCard.querySelectorAll('.att-btn');
     const presentCount = [...allBtns].filter(b => b.dataset.present !== 'false').length;
     const countEl = parentCard.querySelector('[id^="present_"]');
     if (countEl) countEl.textContent = presentCount;
     showToast(newPresent ? '✓ Có mặt' : '✗ Nghỉ', newPresent ? 'success' : 'error');
-    const attMonthVal = document.getElementById('attMonth')?.value;
-    if (attMonthVal) calcStudentFee(studentId, attMonthVal);
   } catch(e) { showToast('Lỗi: ' + e.message, 'error'); }
 }
 
@@ -1678,16 +1801,20 @@ async function resetAllPresent(studentId) {
   const month = document.getElementById('attMonth').value;
   if (!month) return showToast('Chọn tháng trước', 'error');
   if (!confirm('Xóa hết nghỉ, reset về có mặt cả tháng?')) return;
+
   const [yr, mo] = month.split('-').map(Number);
   const s = allStudents.find(x => x.id === studentId);
   if (!s) return;
+
   const scheduledDates = getScheduledDates(s.schedule_days || [], yr, mo);
   showToast('Đang reset...', 'success');
+
+  // Delete all attendance records for this student this month
   const daysInMonth = new Date(yr, mo, 0).getDate();
   await api.delete('attendance', 
     `?student_id=eq.${studentId}&date=gte.${month}-01&date=lte.${month}-${String(daysInMonth).padStart(2,'0')}`
   );
-  await calcStudentFee(studentId, month);
+
   showToast('Đã reset về có mặt cả tháng ✓', 'success');
   loadAttendance();
 }
@@ -1696,20 +1823,26 @@ async function markAllAbsent(studentId) {
   const month = document.getElementById('attMonth').value;
   if (!month) return showToast('Chọn tháng trước', 'error');
   if (!confirm('Đánh dấu nghỉ cả tháng cho học sinh này?')) return;
+
   const [yr, mo] = month.split('-').map(Number);
   const s = allStudents.find(x => x.id === studentId);
   if (!s) return;
+
   const scheduledDates = getScheduledDates(s.schedule_days || [], yr, mo);
   const daysInMonth = new Date(yr, mo, 0).getDate();
   showToast('Đang lưu...', 'success');
+
+  // 1. Xóa hết records cũ
   await api.delete('attendance',
     `?student_id=eq.${studentId}&date=gte.${month}-01&date=lte.${month}-${String(daysInMonth).padStart(2,'0')}`
   );
+
+  // 2. Insert tất cả ngày nghỉ 1 lần (batch)
   const records = scheduledDates.map(date => ({
     student_id: studentId, date, present: false
   }));
   await api.post('attendance', records);
-  await calcStudentFee(studentId, month);
+
   showToast('Đã đánh dấu nghỉ cả tháng ✓', 'success');
   loadAttendance();
 }
@@ -1724,7 +1857,10 @@ function getScheduledDates(days, year, month) {
   const daysInMonth = new Date(year, month, 0).getDate();
   for (let d = 1; d <= daysInMonth; d++) {
     const date = new Date(year, month - 1, d);
-    const dayOfWeek = date.getDay();
+    const dayOfWeek = date.getDay(); // 0=Sun, 1=Mon...
+    const dayStr = dayOfWeek === 0 ? '0' : String(dayOfWeek + 1);
+    // Convert: JS: 0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat
+    // Our: 2=Mon,3=Tue,4=Wed,5=Thu,6=Fri,7=Sat,0=Sun
     const ourDay = dayOfWeek === 0 ? '0' : String(dayOfWeek + 1);
     if (days.includes(ourDay)) {
       dates.push(`${year}-${String(month).padStart(2,'0')}-${String(d).padStart(2,'0')}`);
@@ -1733,6 +1869,9 @@ function getScheduledDates(days, year, month) {
   return dates;
 }
 
+// ============================================
+// FEES
+// ============================================
 async function loadFees() {
   const month = document.getElementById('feeMonth').value;
   if (!month) return;
@@ -1759,78 +1898,6 @@ async function loadFees() {
   } catch(e) { console.error(e); }
 }
 
-// Tính (và lưu) lại học phí cho MỘT học sinh trong MỘT tháng cụ thể.
-async function calcStudentFee(studentId, month) {
-  const s = allStudents.find(x => x.id === studentId);
-  if (!s || !month) return;
-  const [yr, mo] = month.split('-').map(Number);
-  const scheduledDates = getScheduledDates(s.schedule_days || [], yr, mo);
-  const daysInMonth = new Date(yr, mo, 0).getDate();
-  const records = await api.get('attendance', `?student_id=eq.${s.id}&date=gte.${month}-01&date=lte.${month}-${String(daysInMonth).padStart(2,'0')}`);
-  const recMap = {};
-  records.forEach(r => { recMap[r.date] = r; });
-  const presentDates = scheduledDates.filter(d => {
-    const rec = recMap[d];
-    return rec ? rec.present : true;
-  });
-  const sessions = presentDates.length;
-  const cls = allClasses.find(c => c.id === s.class_id);
-  const ctId = s.class_type_id || cls?.class_type_id;
-  let ct = ctId ? allClassTypes.find(x => x.id === ctId) : null;
-  if (!ct) {
-    if (s.class_type === 'mamnon') ct = allClassTypes.find(x => x.fee_type === 'fixed' || x.name.toLowerCase().includes('mầm'));
-    else if (s.class_type === 'toan') ct = allClassTypes.find(x => x.name.toLowerCase().includes('toán'));
-    else ct = allClassTypes.find(x => x.name.toLowerCase().includes('anh') || x.name.toLowerCase().includes('english'));
-  }
-  const cfg = feeConfigs[s.class_type] || {};
-  let baseFee = 0, mealFee = 0, zumbaFee = 0;
-  if (ct) {
-    if (ct.fee_type === 'fixed') {
-      if (sessions > 0) {
-        baseFee = ct.base_fee || 0;
-        mealFee = sessions * (ct.meal_fee_per_session || 0);
-        zumbaFee = ct.extra_fee || 0;
-      }
-    } else {
-      baseFee = sessions * (ct.base_fee || 0);
-      mealFee = sessions * (ct.meal_fee_per_session || 0);
-      if (ct.extra_fee) zumbaFee = ct.extra_fee;
-    }
-  } else if (s.class_type === 'mamnon') {
-    if (sessions > 0) {
-      baseFee = cfg.base_fee || 3500000;
-      mealFee = sessions * (cfg.meal_fee_per_session || 25000);
-      zumbaFee = cfg.zumba_fee || 200000;
-    }
-  } else {
-    baseFee = sessions * (cfg.fee_per_session || 150000);
-  }
-  const subtotal = baseFee + mealFee + zumbaFee;
-  const discPct = s.discount_percent || (s.discount_10 ? 10 : 0);
-  const discount = discPct > 0 ? Math.round(subtotal * discPct / 100) : 0;
-  const total = subtotal - discount;
-  const feeData = { student_id: s.id, month, sessions_present: sessions, base_fee: baseFee, meal_fee: mealFee, zumba_fee: zumbaFee, extra_fee: 0, discount_amount: discount, total, zalo_sent: false };
-  try {
-    const existingFee = await api.get('monthly_fees', `?student_id=eq.${s.id}&month=eq.${month}`);
-    if (existingFee && existingFee.length > 0) {
-      await api.patch('monthly_fees', feeData, `?student_id=eq.${s.id}&month=eq.${month}`);
-    } else {
-      await api.post('monthly_fees', feeData);
-    }
-  } catch(e) { console.error('Lỗi tự động tính học phí:', e); }
-}
-
-// Quét lại tất cả các tháng đã có bản ghi học phí của 1 học sinh và tính lại toàn bộ,
-// dùng khi thông tin học sinh (đặc biệt % giảm) thay đổi sau khi đã tính học phí.
-async function recalcAllFeesForStudent(studentId) {
-  try {
-    const fees = await api.get('monthly_fees', `?student_id=eq.${studentId}&select=month`);
-    for (const f of fees) {
-      await calcStudentFee(studentId, f.month);
-    }
-  } catch(e) { console.error('Lỗi tính lại học phí sau khi sửa học sinh:', e); }
-}
-
 async function calcAllFees() {
   const month = document.getElementById('feeMonth').value;
   if (!month) return showToast('Chọn tháng trước', 'error');
@@ -1847,9 +1914,11 @@ async function calcAllFees() {
         return rec ? rec.present : true;
       });
       const sessions = presentDates.length;
+      // Get class type config
       const cls = allClasses.find(c => c.id === s.class_id);
       const ctId = s.class_type_id || cls?.class_type_id;
       let ct = ctId ? allClassTypes.find(x => x.id === ctId) : null;
+      // Fallback: find by name matching
       if (!ct) {
         if (s.class_type === 'mamnon') ct = allClassTypes.find(x => x.fee_type === 'fixed' || x.name.toLowerCase().includes('mầm'));
         else if (s.class_type === 'toan') ct = allClassTypes.find(x => x.name.toLowerCase().includes('toán'));
@@ -1921,12 +1990,17 @@ function renderFeeTable(fees) {
   document.getElementById('feeTotalRow').style.display = 'block';
 }
 
+// ============================================
+// ZALO
+// ============================================
 async function loadZaloList() {
   const month = document.getElementById('zaloMonth').value;
   if (!month) return;
+  // Save filter value BEFORE populating (populate resets value)
   const savedFilter = document.getElementById('zaloClassFilter')?.value || 'all';
   populateClassDropdown('zaloClassFilter', savedFilter);
   const classFilter = document.getElementById('zaloClassFilter')?.value || 'all';
+
   const fees = await api.get('monthly_fees', `?month=eq.${month}`);
   if (!fees.length) {
     document.getElementById('zaloContent').innerHTML = `<div class="empty-state"><div class="icon">💬</div><p>Chưa có dữ liệu học phí tháng này. Tính học phí trước nhé.</p></div>`;
@@ -1935,23 +2009,29 @@ async function loadZaloList() {
   const studentMap = {};
   allStudents.forEach(s => { studentMap[s.id] = s; });
   const [yr, mo] = month.split('-');
+
+  // Group by class
   const grouped = {};
   for (const f of fees) {
     const s = studentMap[f.student_id];
     if (!s) continue;
+    // Filter by class
     if (classFilter !== 'all') {
       if (s.class_id !== classFilter && !(classFilter === 'mamnon' && s.class_type === 'mamnon' && !s.class_id)) continue;
     }
+    // Group by class_id, fallback to class_type
     const cls = allClasses.find(c => c.id === s.class_id);
     const groupKey = s.class_id || s.class_type;
     const groupName = cls ? cls.name : typeLabel(s.class_type);
     if (!grouped[groupKey]) grouped[groupKey] = { name: groupName, type: s.class_type, items: [] };
     grouped[groupKey].items.push({ f, s });
   }
+
   if (!Object.keys(grouped).length) {
     document.getElementById('zaloContent').innerHTML = `<div class="empty-state"><div class="icon">💬</div><p>Không có dữ liệu</p></div>`;
     return;
   }
+
   let html = '';
   for (const [, group] of Object.entries(grouped)) {
     html += `<div style="margin-bottom:24px">
@@ -1984,6 +2064,8 @@ async function loadZaloList() {
 async function buildZaloMsg(s, f, month, year) {
   const mo = parseInt(month);
   const yr = parseInt(year);
+  
+  // Get scheduled dates and absent dates
   const scheduledDates = getScheduledDates(s.schedule_days || [], yr, mo);
   const totalSessions = scheduledDates.length;
   const daysInMonth = new Date(yr, mo, 0).getDate();
@@ -1994,13 +2076,16 @@ async function buildZaloMsg(s, f, month, year) {
     const d = new Date(r.date + 'T00:00:00');
     return `${d.getDate()}/${mo}`;
   });
+  
   const absentAll = absentDates.length >= totalSessions && totalSessions > 0;
   let lines = [];
+
   if (s.class_type === 'mamnon') {
     const nextMonth = mo === 12 ? 1 : mo + 1;
     lines.push(`Cô gửi phụ huynh HP của ${s.name} Tháng ${nextMonth} nhé! ⭐`);
     lines.push('');
     if (absentAll) {
+      // Nghỉ cả tháng - không thu gì
       lines.push(`Nghỉ học cả tháng ${mo}`);
       lines.push('');
       lines.push(`Tổng: 0 đ`);
@@ -2012,7 +2097,6 @@ async function buildZaloMsg(s, f, month, year) {
         const extraName = ct?.extra_fee_name || 'Zumba';
         lines.push(`${extraName}: ${fmt(f.zumba_fee)}`);
       }
-      lines.push(`Đi học tháng ${mo}: ${f.sessions_present} buổi`);
       if (absentDates.length > 0) {
         lines.push(`Nghỉ học tháng ${mo}: ${absentDates.length} ngày (${absentDates.join(', ')})`);
       }
@@ -2059,64 +2143,96 @@ function copyMsg(id) {
   navigator.clipboard.writeText(text).then(() => showToast('Đã copy tin nhắn ✓', 'success'));
 }
 
-async function exportStudentList(classId, className) {
-  let students;
-  if (classId === 'mamnon') {
-    students = allStudents.filter(s => s.class_type === 'mamnon');
-  } else {
-    const cls = allClasses.find(c => c.id === classId);
-    if (cls?.class_type === 'mamnon') {
-      students = allStudents.filter(s => s.class_type === 'mamnon' && (s.class_id === classId || !s.class_id));
-    } else {
-      students = allStudents.filter(s => s.class_id === classId);
-    }
-  }
-  if (!students || !students.length) return showToast('Lớp chưa có học sinh để xuất', 'error');
-  const rows = [];
-  rows.push([`DANH SÁCH HỌC SINH LỚP ${className}`]);
-  rows.push([]);
-  rows.push(['STT','Tên học sinh','Ngày sinh','SĐT Zalo','Phụ huynh','Giảm %']);
-  students.forEach((s, i) => {
-    rows.push([
-      i + 1,
-      s.name || '',
-      s.date_of_birth ? formatDate(s.date_of_birth) : '',
-      s.phone_zalo || '',
-      s.parent_name || '',
-      s.discount_percent || 0
-    ]);
-  });
-  const wb = XLSX.utils.book_new();
-  const ws = XLSX.utils.aoa_to_sheet(rows);
-  ws['!cols'] = [{wch:5},{wch:22},{wch:12},{wch:14},{wch:16},{wch:8}];
-  XLSX.utils.book_append_sheet(wb, ws, 'Danh sách');
-  const safeName = String(className).replace(/[^a-zA-Z0-9]/g, '_');
-  XLSX.writeFile(wb, `DanhSach_${safeName}.xlsx`);
-  showToast('Đã xuất file Excel ✓', 'success');
-}
-
+// ============================================
+// EXPORT EXCEL
+// ============================================
 async function exportExcel() {
   const month = document.getElementById('exportMonth').value;
   if (!month) return showToast('Chọn tháng trước', 'error');
   const classFilter = document.getElementById('exportClassFilter')?.value || 'all';
   const [yr, mo] = month.split('-');
   const daysInMonth = new Date(yr, mo, 0).getDate();
+
+  // Get fees
   const fees = await api.get('monthly_fees', `?month=eq.${month}`);
   if (!fees.length) return showToast('Chưa có dữ liệu học phí', 'error');
+
   const studentMap = {};
   allStudents.forEach(s => { studentMap[s.id] = s; });
+
+  // Filter students
   const filtered = fees.filter(f => {
     if (classFilter === 'all') return true;
     const s = studentMap[f.student_id];
     return s && (s.class_id === classFilter || s.class_type === classFilter);
   });
   if (!filtered.length) return showToast('Không có dữ liệu cho lớp này', 'error');
+
+  // Get attendance for all filtered students
   const studentIds = filtered.map(f => f.student_id);
   const attRecords = await api.get('attendance', `?student_id=in.(${studentIds.join(',')})&date=gte.${month}-01&date=lte.${month}-${String(daysInMonth).padStart(2,'0')}`);
   const attMap = {};
   attRecords.forEach(r => { attMap[`${r.student_id}_${r.date}`] = r.present; });
+
+  // Build CSV - Sheet 1: Summary
+  let rows = [];
   const className = classFilter === 'all' ? 'Tất cả lớp' : (allClasses.find(c=>c.id===classFilter)?.name || classFilter);
+  rows.push([`BÁO CÁO HỌC PHÍ THÁNG ${parseInt(mo)}/${yr} - ${className}`]);
+  rows.push([]);
+  rows.push(['STT','Tên học sinh','Lớp','Số buổi','HP cơ bản','Tiền ăn','Zumba','Giảm 10%','Tổng tiền','SĐT Zalo']);
+
+  let grandTotal = 0;
+  let stt = 1;
+  for (const f of filtered) {
+    const s = studentMap[f.student_id] || {};
+    const cls = allClasses.find(c => c.id === s.class_id);
+    rows.push([stt++, s.name||'', cls?.name||typeLabel(s.class_type), f.sessions_present, f.base_fee, f.meal_fee||0, f.zumba_fee||0, f.discount_amount||0, f.total, s.phone_zalo||'']);
+    grandTotal += f.total;
+  }
+  rows.push([]);
+  rows.push(['','','','','','','','TỔNG CỘNG','',grandTotal,'']);
+  rows.push([]);
+  rows.push([]);
+
+  // Sheet 2: Attendance detail
+  rows.push([`ĐIỂM DANH CHI TIẾT THÁNG ${parseInt(mo)}/${yr}`]);
+  rows.push([]);
+
+  // Get all scheduled dates for each student
+  for (const f of filtered) {
+    const s = studentMap[f.student_id];
+    if (!s) continue;
+    const scheduledDates = getScheduledDates(s.schedule_days || [], parseInt(yr), parseInt(mo));
+    if (!scheduledDates.length) continue;
+
+    // Header row: Tên + dates
+    const headerRow = ['Tên'];
+    scheduledDates.forEach(d => {
+      const day = parseInt(d.split('-')[2]);
+      const dateObj = new Date(d + 'T00:00:00');
+      const dayNames = ['CN','T2','T3','T4','T5','T6','T7'];
+      headerRow.push(`${dayNames[dateObj.getDay()]} ${day}`);
+    });
+    headerRow.push('Có mặt', 'Nghỉ');
+    rows.push(headerRow);
+
+    // Student row
+    const studentRow = [s.name];
+    let presentCount = 0;
+    scheduledDates.forEach(date => {
+      const present = attMap[`${s.id}_${date}`] !== false;
+      if (present) presentCount++;
+      studentRow.push(present ? '✓' : '✗');
+    });
+    studentRow.push(presentCount, scheduledDates.length - presentCount);
+    rows.push(studentRow);
+    rows.push([]);
+  }
+
+  // Build XLSX using SheetJS
   const wb = XLSX.utils.book_new();
+
+  // Sheet 1: Học phí
   const feeRows = [];
   feeRows.push([`BÁO CÁO HỌC PHÍ THÁNG ${parseInt(mo)}/${yr} - ${className}`]);
   feeRows.push([]);
@@ -2133,6 +2249,8 @@ async function exportExcel() {
   const ws1 = XLSX.utils.aoa_to_sheet(feeRows);
   ws1['!cols'] = [{wch:5},{wch:20},{wch:15},{wch:8},{wch:12},{wch:12},{wch:12},{wch:12},{wch:12},{wch:14}];
   XLSX.utils.book_append_sheet(wb, ws1, 'Học phí');
+
+  // Sheet 2: Điểm danh
   const attRows2 = [];
   attRows2.push([`ĐIỂM DANH CHI TIẾT THÁNG ${parseInt(mo)}/${yr}`]);
   attRows2.push([]);
@@ -2162,6 +2280,7 @@ async function exportExcel() {
   }
   const ws2 = XLSX.utils.aoa_to_sheet(attRows2);
   XLSX.utils.book_append_sheet(wb, ws2, 'Điểm danh');
+
   const safeName = className.replace(/[^a-zA-Z0-9]/g, '_');
   XLSX.writeFile(wb, `HocPhi_${safeName}_T${mo}_${yr}.xlsx`);
   showToast('Đã xuất file Excel ✓', 'success');
@@ -2169,12 +2288,17 @@ async function exportExcel() {
 
 function exportExcelByType(type) { exportExcel(); }
 
+// ============================================
+// DASHBOARD
+// ============================================
 function updateDashStats() {
   document.getElementById('statTotal').textContent = allStudents.length;
   const grid = document.getElementById('dashStatsGrid');
   if (!grid) return;
+  // Remove old dynamic cards
   grid.querySelectorAll('.stat-card-dynamic').forEach(e => e.remove());
   const colors = ['gold','blue','green','red','blue','green'];
+  // Group students by class_type_id or class_type
   const groups = {};
   allStudents.forEach(s => {
     const ct = allClassTypes.find(x => x.id === s.class_type_id);
@@ -2205,6 +2329,7 @@ async function loadDashboard() {
     }
     const studentMap = {};
     allStudents.forEach(s => { studentMap[s.id] = s; });
+    // Nhóm theo lớp/loại lớp thực tế (không hardcode), để không bỏ sót loại lớp mới tạo
     const byGroup = {};
     fees.forEach(f => {
       const s = studentMap[f.student_id];
@@ -2242,6 +2367,9 @@ async function loadDashboard() {
   } catch(e) { console.error(e); }
 }
 
+// ============================================
+// PASSWORD
+// ============================================
 async function changePassword() {
   const old = document.getElementById('oldPass').value;
   const n1 = document.getElementById('newPass').value;
@@ -2258,6 +2386,9 @@ async function changePassword() {
   } catch(e) { showToast('Lỗi: ' + e.message, 'error'); }
 }
 
+// ============================================
+// UTILS
+// ============================================
 function copyPhone(phone) {
   navigator.clipboard.writeText(phone).then(() => showToast('Đã copy SĐT: ' + phone + ' → Paste vào Zalo PC để tìm kiếm', 'success'));
 }
@@ -2297,6 +2428,7 @@ function showToast(msg, type='success') {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
+// Auto-init nếu đã có config
 if (SUPABASE_URL && SUPABASE_KEY) {
   document.getElementById('inputUrl').value = SUPABASE_URL;
   document.getElementById('inputKey').value = SUPABASE_KEY;
